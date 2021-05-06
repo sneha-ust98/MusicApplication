@@ -18,7 +18,6 @@ public class Music
 {
     //@id annotation makes id variable as primary key
     @Id
-    @NotBlank(message = "Id is mandatory")
     private int id;
     @NotBlank(message = "Title is Mandatory")
     private String title;

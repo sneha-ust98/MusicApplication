@@ -33,7 +33,7 @@ return repository.save(recommendation);
 
     @Override
     public List<Recommendation> getAllSongs() {
-        return repository.findAll();
+        return repository.getBycounter();
     }
 
     @Override

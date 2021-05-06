@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(password, authUser.getPassword())) {
             throw new UserNotFoundException(message2);
         }
+
         return authUser;
     }
 

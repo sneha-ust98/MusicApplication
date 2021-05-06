@@ -27,15 +27,14 @@ public class UserController {
     private JWTTokenGenerator jwtTokenGenerator;
     ResponseEntity<?> responseEntity;
 
-    //Getting the values for message from property file
 
-    @Value("${controller.exception.message1}")
+    @Value("${app.controller.exception.message1}")
     private String message1;
 
-    @Value("${controller.exception.message2}")
+    @Value("${app.controller.exception.message2}")
     private String message2;
 
-    @Value("${controller.exception.message3}")
+    @Value("${app.controller.exception.message3}")
     private String message3;
 
 
@@ -47,8 +46,7 @@ public class UserController {
     }
 
 
-    //If user registration is a success, return status as Created else Conflict
-    //uses POST mapping
+
 
     @PostMapping("register")
     public ResponseEntity<?> registerUser( @Valid @RequestBody User user) {
@@ -62,10 +60,7 @@ public class UserController {
     }
 
 
-    //ID and Password is checked
-    //If credentials given are correct, token should be generated
-    //else exception is thrown
-    //uses "login" and POST
+
 
     @PostMapping("login/user")
     public ResponseEntity<?> loginUser( @RequestBody User user)  {
@@ -78,6 +73,10 @@ public class UserController {
 
             if (userDetails == null) {
                 throw new UserNotFoundException(message2);
+            }
+            if(!(user.getId().equals(userDetails.getId())))
+            {
+                throw new UserNotFoundException(message3);
             }
 
             responseEntity = new ResponseEntity<>(jwtTokenGenerator.generateToken(userDetails),HttpStatus.OK);
